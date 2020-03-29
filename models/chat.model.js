@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 const chatSchema = mongoose.Schema({
     messages: [{
         msg: String,
-        timestamps: {
-            createdAt: 'created_at'
+        createdAt: {
+            type: Date,
+            default: Date.now
         }
     }]
 })
