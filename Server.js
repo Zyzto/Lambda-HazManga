@@ -4,37 +4,62 @@ const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const flash = require("connect-flash"); // displays on time msgs
-// const passport = require("./config/passportConfig");
+const passport = require("./helper/ppConfig");
 
 //init
-const server = express();
+const server = express()
 
 //Routers
 const authRoutes = require("./routes/auth.route");
+const itemRoutes = require("./routes/item.route");
 //
 
 //mongoDB connection
 mongoose.connect(process.env.MONGODB, {
     useNewUrlParser: true,
-
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 }, () => console.log(`Connected to ${process.env.MONGODB}`), (err) => console.log(`MongoDB ERROR: ${err}`))
 
-//body praser
+
+mongoose.set("debug", true);
+server.use(express.static("public")); //tells express to look in public for static files
 server.use(express.urlencoded({
     extended: true
 }))
-server.set('view engine', 'ejs') //ejs-layouts
+server.set("view engine", "ejs")
 server.use(expressLayouts)
 
-server.get('*/', (req, res) => {
-    res.status(404).send('Error 404')
+//--must be before passport
+server.use(
+    session({
+        secret: process.env.SECRET,
+        saveUninitialized: true,
+        resave: false
+        // cookie: { maxAge: 360000 } //duration of session
+    })
+)
+
+server.use(passport.initialize())
+server.use(passport.session())
+server.use(flash())
+
+server.use(function (request, response, next) {
+    response.locals.alerts = request.flash() //displays one time messages
+    response.locals.currentUser = request.user
+    console.log(response.locals.alerts)
+    next()
 })
 
-//app.use(<routes>)
+//server.use(<routes>)
 server.use(authRoutes)
-
 //
 
+//must be after routes
+server.get('*', (request, response) => {
+    response.render('html/404', {
+        layout: false
+    })
+})
 
 server.listen(process.env.PORT, () => console.log(`connected to Express on port: ${process.env.PORT}`))
