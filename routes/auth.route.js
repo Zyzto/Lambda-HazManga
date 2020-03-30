@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
-const passport = require("../helper/ppConfig");
-const isLoggedIn = require("../helper/isLoggedin");
+const flash=require('connect-flash')
+// const passport = require("../helper/ppConfig");
+// const isLoggedIn = require("../helper/isLoggedin");
 const { check, validationResult } = require("express-validator");
 
 router.get("/auth/register", (request, response) => {
-  response.render("auth/signup");
+  response.render("auth/register");
 });
 
 router.post(
@@ -17,14 +18,14 @@ router.post(
     check("email").isEmail(),
     // password must be at least 5 chars long
     check("password").isLength({ min: 8 }),
-    check("password Confirmation").isLength({ min: 8 })
+    // check("password Confirmation").isLength({ min: 8 })
     
   ],
   (request, response) => {
     const errors = validationResult(request);
     console.log(errors);
     if (!errors.isEmpty()) {
-      request.flash("autherror", errors.errors);
+    //   request.flash("autherror", errors.errors);
       return response.redirect("/auth/register");
     }
 
@@ -43,7 +44,7 @@ router.post(
         // console.log(err);
         if (err.code == 11000) {
           console.log("Email Exists");
-          request.flash("error", "Email Exists");
+        //   request.flash("error", "Email Exists");
           return response.redirect("/auth/register");
         }
         response.send("error!!!");
