@@ -32,7 +32,9 @@ server.get('*/', (req, res) => {
 })
 
 //app.use(<routes>)
+server.use(authRoutes)
 
 //
+
 
 server.listen(process.env.PORT, () => console.log(`connected to Express on port: ${process.env.PORT}`))
