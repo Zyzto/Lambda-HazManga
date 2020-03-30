@@ -11,6 +11,7 @@ const server = express();
 
 //Routers
 const authRoutes = require("./routes/auth.route");
+const itemRoutes = require("./routes/item.route");
 //
 
 //mongoDB connection
@@ -27,12 +28,13 @@ server.use(express.urlencoded({
 server.set('view engine', 'ejs') //ejs-layouts
 server.use(expressLayouts)
 
-server.get('*/', (req, res) => {
-    res.status(404).send('Error 404')
-})
+// server.get('*/', (req, res) => {
+//     res.status(404).send('Error 404')
+// })
 
 //app.use(<routes>)
-server.use(authRoutes)
+server.use(authRoutes);
+server.use(itemRoutes);
 
 //
 
