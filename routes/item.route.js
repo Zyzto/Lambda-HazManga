@@ -10,4 +10,8 @@ router.get("/home", (request, response) => {
     });
 });
 
+router.get("/item", (request, response) => {
+    response.render("item");
+   });
+
 module.exports = router;
