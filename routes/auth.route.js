@@ -100,6 +100,7 @@ router.post ("/auth/change",(request, response)=>{
     User.findByIdAndUpdate(request.user._id,{password:hashedPass},(err,updatedMoodel)=>{
       request.flash("success", "Password updated Successfully");
       response.redirect("/home ");
+      
     });
   }
   else{
