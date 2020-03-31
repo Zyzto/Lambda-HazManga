@@ -1,0 +1,23 @@
+<% order.forEach(list => { %>
+    <% let orderTotal %>
+<div>
+    <label>Order Status : <%= list.status %></label>
+    <% if (list.status == 'processing') { %>
+     <button onclick="window.location='/#'">Shipped</button>
+    <% } else if{list.status == 'shipped'}{ %>
+    <button onclick="window.location='/#'">Delivered</button>
+    <% } else if{list.status == 'delivered'} %>
+    <button onclick="window.location='/#'">Archive</button>
+    <% } %>
+    <% list.item.forEach(card => { %> 
+        <% orderTotal += card.qty*card.price %> 
+        <img src="<%= card.image %> " alt="<%= card.name %> image">
+        <label><%= card.name %> </label>
+        <label>Description: <%= card.description %> </label>
+        <label>Quantity: <%= card.qty %> </label>
+        <label>Total: <%= card.qty*card.price %> SAR </label>
+    <% }) %>
+    <div>Order Total: <%= orderTotal %> SAR </div>
+</div>
+
+<% }) %>
