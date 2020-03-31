@@ -53,9 +53,15 @@ server.use(function (request, response, next) {
 
 //server.use(<routes>)
 server.use(authRoutes)
+server.use(itemRoutes)
 //
 
 //must be after routes
+
+server.get('/', (request, response) => {
+    response.redirect('/home')
+})
+
 server.get('*', (request, response) => {
     response.render('html/404', {
         layout: false
