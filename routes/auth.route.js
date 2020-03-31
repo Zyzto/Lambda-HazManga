@@ -91,4 +91,20 @@ router.get("/auth/logout", (request, response) => {
   response.redirect("/auth/login");
 });
 
+
+//-- change password 
+router.post ("/auth/change",(request, response)=>{
+  if (request.body.password ==request.body.confirmPassword){
+    let newPass= request.body.password;
+    let  hashedPass = bcrypt.hashSync(newPass,10);
+    User.findByIdAndUpdate(request.user._id,{password:hashedPass},(err,updatedMoodel)=>{
+      request.flash("success", "Password updated Successfully");
+      response.redirect("/home ");
+    });
+  }
+  else{
+    request.flash("success","password and confirm password do not match ")
+    response.redirect('/auth/change')
+  }
+});
 module.exports = router;
