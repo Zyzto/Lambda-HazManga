@@ -1,0 +1,9 @@
+<button onclick="window.location='/item/create'">Create new Item</button>
+
+<% item.forEach(card => { %>
+<div>
+    <img src="<%= card.image %> " width="200" height="300">
+    <div><%= card.name %></div>
+    <div><%= card.description %></div>
+</div>
+<% }) %>

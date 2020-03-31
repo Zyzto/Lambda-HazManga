@@ -1,0 +1,27 @@
+<div>
+    <form method="POST" action="/item/create"enctype="multipart/form-data">
+      <div>
+        <label>Name</label>
+        <input name="name" type="text" />
+      </div>
+      <div>
+        <label>Quantity</label>
+        <input name="quantity" type="number" />
+      </div>
+      <div>
+        <label>Price</label>
+        <input name="price" type="number" />
+      </div>
+      <div>
+          <label>Image</label>
+          <input type="file" name="filetoupload" />
+        </div>
+      <div>
+        <label>Description</label>
+        <input name="description" type="text" />
+      </div>
+      <div>
+        <button type="submit">Add new Item</button>
+      </div>
+    </form>
+  </div>
