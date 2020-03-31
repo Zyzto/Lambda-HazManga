@@ -70,4 +70,41 @@ router.post("/item/create", upload.single("filetoupload"), (req, res, next) => {
         });
 });
 
+
+// router.get("/cart/add", (request, response) => {
+//     // request.user
+//     User.findById().then(users => {
+//         Item.find().then(item => {
+//             response.render("cart", { item, users });
+//         })
+//             .catch(err => {
+//                 request.flash("error", err)
+//             })
+//     });
+// });
+
+router.put("/cart/add/:id", (request, response) => {
+           
+            // User.findById(response.locals.currentUser._id,(err,cartNew)=>{
+            //     console.log("before",cartNew)
+            //     const cartAdd={
+            //         "_id":{"$oid":request.params.id}
+            //     }
+            //     cartNew.cart.push(cartAdd)
+            //     console.log("after",cartNew)
+            // })
+
+
+        // console.log("current User",response.locals.currentUser)
+        // console.log("Request params",request.params)
+
+        
+});
+
+// router.get("/cart", (request, response) => {
+    
+//     response.render("cart");
+// });
+
+
 module.exports = router;
