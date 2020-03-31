@@ -63,13 +63,32 @@ router.post(
       .catch(err => {
         console.log(`ERROR: `, err);
         if (err.code == 11000) {
-          console.log("Email Exists");
           request.flash("error", "Email Exists");
-          console.log(`reached Here`);
           return response.redirect("/home");
         }
         response.send(`error!!! ${err}`);
       });
   }
 );
+
+router.get("/auth/login", (request, response) => {
+  response.render("auth/login");
+});
+
+router.post(
+  "/auth/login",
+  passport.authenticate("local", {
+    successRedirect: "/home",
+    failureRedirect: "/auth/login",
+    failureFlash: "Invalid Username or Password",
+    successFlash: "You have logged In!"
+  })
+);
+
+router.get("/auth/logout", (request, response) => {
+  request.logout(); //clear and break session
+  request.flash("success", "Yay! your out!");
+  response.redirect("/auth/login");
+});
+
 module.exports = router;
