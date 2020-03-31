@@ -1,1 +1,26 @@
-<h2>This home page</h2>
+<form method="POST" action="/home">
+    <div>
+        <label for="chat-username">Name</label>
+        <input type="text"  name="name">
+    </div>
+
+        <div>
+            <label for="">Message: </label>
+            <input type="text"  id="">
+          </div>
+          
+    <div>
+          <button type="submit" class="btn btn-primary">Send</button>
+     </div>
+        </form>
+    
+
+
+       
+<% item.forEach(card => { %>
+    <div>
+        <img src="<%= card.image %> " width="200" height="300">
+        <div><%= card.name %></div>
+        <div><%= card.description %></div>
+    </div>
+    <% }) %>
