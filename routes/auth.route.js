@@ -64,7 +64,7 @@ router.post(
         console.log(`ERROR: `, err);
         if (err.code == 11000) {
           request.flash("error", "Email Exists");
-          return response.redirect("/home");
+          return response.redirect("/auth/register");
         }
         response.send(`error!!! ${err}`);
       });
