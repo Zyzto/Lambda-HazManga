@@ -108,8 +108,8 @@ router.get('/cart', (request, response) => {
         Item.find({
                 _id :user.cart
             }).then(cart => {
-                console.log('name', cart[0])
-                console.log(`count`, count[cart[0]._id]);
+                // console.log('name', cart[0])
+                // console.log(`count`, count[cart[0]._id]);
             response.render('cart', {
                 count: count,
                 cart

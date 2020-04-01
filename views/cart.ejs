@@ -1,8 +1,62 @@
-<% cart.forEach(item => { %>
-    <div>
-        <img src="<%= item.image %> " width="200" height="300">
-        <div>Name: <%= item.name %></div>
-        <div>Description: <%= item.description %></div>
-        <div>Quntity: <%= count[item._id] %></div>
-    </div>
-    <% }) %>
+<button onclick="window.location='/order/payment'">Checkout</button>
+<% let cartTotal = 0 %> <% cart.forEach(item => { %>
+<div>
+  <img src="<%= item.image %> " width="200" height="300" />
+  <div>Name: <%= item.name %></div>
+  <div>Description: <%= item.description %></div>
+  <div>Quantity: <%= count[item._id] %></div>
+  <div>Price: <%= count[item._id]*item.price %> SAR</div>
+  <div>
+    <form action="/cart/delete/<%=item._id%>?_method=DELETE" method="POST">
+      <input type="submit" name="" value="Delete" />
+    </form>
+  </div>
+  <div>
+    <form action="/cart/update/add/<%=item._id%>?_method=PUT" method="POST">
+      <% if (true) { %>
+       <input
+        type="submit"
+        name=""
+        value="+"
+      />
+      <% } %>
+      <input
+        type="hidden"
+        name="qty"
+        value="<%= count[item._id] %>"
+      />
+      <input
+        type="hidden"
+        name="itemQTY"
+        value="<%= item.quantity %>"
+      />
+    </form>
+    <form action="/cart/update/remove/<%=item._id%>?_method=PUT" method="POST">
+      <% if (true) { %>
+       <input
+        type="submit"
+        name=""
+        value="-"
+      />
+      <% } %>
+      <input
+        type="hidden"
+        name="qty"
+        value="<%= count[item._id] %>"
+      />
+      <input
+        type="hidden"
+        name="itemQTY"
+        value="<%= item.quantity %>"
+      />
+      </form>
+  </div>
+  <% cartTotal += (count[item._id]*item.price) %>
+</div>
+<!-- <script>
+  $("#qty<%= item._id %>").change(() => {
+    $("#updatebtn<%= item._id %>").css("display", "");
+  });
+</script> -->
+<% }) %>
+<div>Order Total: <%= cartTotal %> SAR</div>
