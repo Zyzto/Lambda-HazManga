@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Haz Manga</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <% if(alerts.success){ alerts.success.forEach(function(msg){ %>
     <div class="alert alert-success">
-      <%= msg %>
+        <%= msg %>
     </div>
     <% }) } if(alerts.error){ alerts.error.forEach(function(msg){ %>
     <div class="alert alert-danger">
-      <%= msg %>
+        <%= msg %>
     </div>
     <% })} if(alerts.autherror){alerts.autherror.forEach(function(msg){ %>
     <div class="alert alert-danger">
-      Your <%= msg.param %> has <%= msg.msg %>
+        Your <%= msg.param %> has <%= msg.msg %>
     </div>
     <% })} %>
     <nav>
-      <button onclick="window.location='/home'">Home</button>
-      <% if(currentUser) {if(currentUser.isSeller) {%>
-      <% console.log('current user',currentUser) %>
-      <button onclick="window.location='/item'">Items</button>
-      <button onclick="window.location='/order'">Orders</button>
-      <%} }if(currentUser) {%>
-      <button onclick="window.location='/auth/logout'">Logout</button>
-      <%} if(!currentUser) {%>
-      <button onclick="window.location='/auth/login'">Login</button>
-      <button onclick="window.location='/auth/register'">Register</button>
-      <%} %>
+        <button onclick="window.location='/home'">Home</button>
+        <% if(currentUser) {if(currentUser.isSeller) {%>
+        <% console.log('current user',currentUser) %>
+        <button onclick="window.location='/item'">Items</button>
+        <button onclick="window.location='/order'">Orders</button>
+        <%} }if(currentUser) {%>
+        <button onclick="window.location='/cart'">Cart</button>
+        <button onclick="window.location='/auth/logout'">Logout</button>
+        <%} if(!currentUser) {%>
+        <button onclick="window.location='/auth/login'">Login</button>
+        <button onclick="window.location='/auth/register'">Register</button>
+        <%} %>
     </nav>
     <%- body %>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="/js/happy.js"></script>
-  </body>
+</body>
+
 </html>
