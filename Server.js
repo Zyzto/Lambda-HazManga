@@ -55,6 +55,7 @@ server.use(function (request, response, next) {
 //server.use(<routes>)
 server.use(authRoutes)
 server.use(itemRoutes)
+server.use(orderRoutes)
 //
 
 //must be after routes
