@@ -12,11 +12,14 @@
   <form action="/auth/change?_method=PUT" method="POST">
     <label> Old Password</label>
     <input type="password" name="password" />
+
     <label> New Password</label>
-    <input type="password" name="password" />
+    <input type="password" name="newPassword" />
+
     <label> Confirm Password </label>
-    <input type="password" name="password" />
-    <button type="submit">change</button>
+    <input type="password" name="confirmPassword" />
+
+    <input type="submit" value="change Password"/>
   </form>
 </body>
 </html>

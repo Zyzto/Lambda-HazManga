@@ -5,6 +5,7 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const flash = require("connect-flash"); // displays on time msgs
 const passport = require("./helper/ppConfig");
+const methodOverride = require('method-override');
 
 //init
 const server = express()
@@ -30,6 +31,7 @@ server.use(express.urlencoded({
 }))
 server.set("view engine", "ejs")
 server.use(expressLayouts)
+server.use(methodOverride('_method'));
 
 //--must be before passport
 server.use(

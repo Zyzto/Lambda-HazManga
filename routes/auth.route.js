@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const flash = require('connect-flash')
 const passport = require("../helper/ppConfig");
+const bcrypt = require('bcrypt')
 // const isLoggedIn = require("../helper/isLoggedin");
 const {
   check,
@@ -93,19 +94,23 @@ router.get("/auth/logout", (request, response) => {
 
 
 //-- change password 
-router.post ("/auth/change",(request, response)=>{
-  if (request.body.password ==request.body.confirmPassword){
-    let newPass= request.body.password;
-    let  hashedPass = bcrypt.hashSync(newPass,10);
-    User.findByIdAndUpdate(request.user._id,{password:hashedPass},(err,updatedMoodel)=>{
-      request.flash("success", "Password updated Successfully");
-      response.redirect("/home ");
-      
-    });
-  }
-  else{
-    request.flash("success","password and confirm password do not match ")
+router.get('/auth/change', (request, response) => {
+  response.render('auth/change')
+})
+
+router.put('/auth/change', (request, response) => {
+  console.log('body', request.body);
+  if (request.body.newPassword == request.body.confirmPassword) {
+    User.findByIdAndUpdate(response.locals.currentUser._id, {
+      password: bcrypt.hashSync(request.body.newPassword, 10)
+    }).then(() => {
+      request.flash("success", "Password updated Successfully")
+      response.redirect("/home")
+    })
+  } else {
+    request.flash("success", "password and confirm password do not match ")
     response.redirect('/auth/change')
   }
-});
-module.exports = router;
+})
+
+module.exports = router

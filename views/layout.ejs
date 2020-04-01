@@ -22,10 +22,11 @@
     <nav>
       <button onclick="window.location='/home'">Home</button>
       <% if(currentUser) {if(currentUser.isSeller) {%>
-      <% console.log('current user',currentUser) %>
       <button onclick="window.location='/item'">Items</button>
       <button onclick="window.location='/order'">Orders</button>
       <%} }if(currentUser) {%>
+
+      <button onclick="window.location='/auth/change'">Change Password</button>
       <button onclick="window.location='/auth/logout'">Logout</button>
       <%} if(!currentUser) {%>
       <button onclick="window.location='/auth/login'">Login</button>
