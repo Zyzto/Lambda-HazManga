@@ -1,0 +1,10 @@
+<% cart.forEach(item => { %>
+    <div>
+        <img src="<%= item.image %> " width="200" height="300">
+        <div>Name: <%= item.name %></div>
+        <div>Description: <%= item.description %></div>
+        <div>Quntity: <%= count[item._id] %></div>
+    </div>
+    <% }) %>
+
+    
