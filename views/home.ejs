@@ -22,8 +22,10 @@
         <img src="<%= card.image %> " width="200" height="300">
         <div><%= card.name %></div>
         <div><%= card.description %></div>
+        <% if(currentUser) {%>
         <form action="/cart/add/<%=card._id%>?_method=PUT" method="POST">
             <input type="submit" name="" value="+"/>
         </form>        
+        <%} %>
     </div>
     <% }) %>
