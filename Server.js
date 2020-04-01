@@ -6,6 +6,7 @@ const session = require("express-session");
 const flash = require("connect-flash"); // displays on time msgs
 const passport = require("./helper/ppConfig");
 const methodOverride = require('method-override');
+const MongoStore = require('connect-mongo')(session)
 
 //init
 const server = express()
@@ -38,8 +39,11 @@ server.use(
     session({
         secret: process.env.SECRET,
         saveUninitialized: true,
-        resave: false
+        resave: false,
         // cookie: { maxAge: 360000 } //duration of session
+        store: new MongoStore({
+            url: process.env.MONGODB
+        })
     })
 )
 
