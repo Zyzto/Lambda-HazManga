@@ -28,7 +28,8 @@ var userSchema = new mongoose.Schema({
   },
   cart: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Item'
+    ref: 'Item',
+    qty: Number
   }],
   isSeller: {
     type: Boolean,

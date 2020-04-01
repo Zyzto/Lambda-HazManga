@@ -12,6 +12,7 @@ const server = express()
 //Routers
 const authRoutes = require("./routes/auth.route");
 const itemRoutes = require("./routes/item.route");
+const orderRoutes = require("./routes/order.route");
 //
 
 //mongoDB connection
