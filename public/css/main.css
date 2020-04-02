@@ -42,9 +42,19 @@ body {
     font-weight: normal;
     text-transform: uppercase;
     padding: 4px 20px;
-    float: left;
+    /* float: left; */
 }
-
+.ItemPage{
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    font-size: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    padding: 4px 20px;
+    margin-left: 20px;
+    /* float: left; */
+}
 .clear {
     clear: both;
 }
@@ -96,9 +106,10 @@ span {
 .shopping-cart {
     display: inline-block;
     background: url('https://img.icons8.com/ios/72/shopping-cart.png') no-repeat 0 0;
+    background-color:#FFFFFFD6;
     background-size: 24px 24px;
     background-position: 0px;
-    font-weight: 700;
+    font-weight: 900;
     width: 35px;
     height: 50px;
     margin: 0 10px 0 0;
@@ -137,22 +148,16 @@ span {
   background: #b1adad;
 }
 .cart-box{
-
-
     background-color:#fff;
     width: 50%;
     margin: 50px auto;
 padding: 50px;
-
 }
 product-image{
     width: 100px;
-
-
 }
 
 .product-details{
-
     float: left; width: 37%;
 }
 .column-labels {
@@ -161,13 +166,10 @@ product-image{
   .product-image {
     float: right;
     width: auto;
-    
-      margin: 0 0 10px 10px;
+     margin: 0 0 10px 10px;
     }
     .product-details {
         float: none;
         margin-bottom: 10px;
         width: auto;
       }
-    
-      
