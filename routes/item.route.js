@@ -106,8 +106,8 @@ router.get('/cart', (request, response) => {
     User.findById(response.locals.currentUser._id).then(user => {
         const count = counta(user.cart)
         Item.find({
-                _id :user.cart
-            }).then(cart => {
+            _id: user.cart
+        }).then(cart => {
             response.render('cart', {
                 count: count,
                 cart
@@ -117,16 +117,24 @@ router.get('/cart', (request, response) => {
 })
 
 router.put("/cart/add/:id", (request, response) => {
-
-    User.findByIdAndUpdate(response.locals.currentUser._id, {
-        $push: {
-            cart: request.params.id,
-
-        }
-    }).then(() => {
-        response.redirect('/home')
-    }).catch(err => console.log('error', err))
-
+    Item.findById(request.params.id).then((item) => {
+        User.findById(response.locals.currentUser._id).then(user => {
+            // console.log('user.cart+++++++', user);
+            const count = counta(user.cart)
+            if ((item.quantity >= count[request.params.id] + 1) || user.cart.length == 0 || count[request.params.id] == undefined) {
+                User.findByIdAndUpdate(response.locals.currentUser._id, {
+                    $push: {
+                        cart: request.params.id,
+                    }
+                }).then(() => {
+                    response.redirect('/home')
+                    request.flash('success', 'Item Added')
+                }).catch(err => console.log('error', err))
+            }
+            response.redirect('/home')
+            request.flash('error', 'Max Quantity')
+        })
+    })
 });
 
 // router.get("/cart", (request, response) => {
