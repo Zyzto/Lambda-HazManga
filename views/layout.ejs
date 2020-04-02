@@ -54,9 +54,6 @@
       <% if(currentUser) {if(currentUser.isSeller) {%>
       <%console.log('currentuser',currentUser) %>
       <button class="nav-left" onclick="window.location='/item'">Items</button>
-      <button class="nav-left" onclick="window.location='/order'">
-        Orders
-      </button>
       <%} }if(currentUser) {%>
       <section class="nav-right">
         <button onclick="window.location='/cart'">Cart</button>
