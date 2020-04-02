@@ -137,6 +137,17 @@ router.put("/cart/add/:id", (request, response) => {
     })
 });
 
+router.delete('/item/delete/:id', (request, response) => {
+    Item.findByIdAndDelete(request.params.id).then(() => {
+        response.redirect('/item')
+        request.flash('success', 'item deleted')
+        
+    }).catch(err=>{
+        console.log("error",err)
+    })
+})
+
+
 // router.get("/cart", (request, response) => {
 
 //     response.render("cart");
