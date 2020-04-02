@@ -4,7 +4,6 @@ const orderSchema = mongoose.Schema({
     item: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
-        qty: Number
     }],
     user: {
         type: mongoose.Schema.Types.ObjectId,

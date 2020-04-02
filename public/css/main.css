@@ -112,3 +112,27 @@ span {
 .nav-left {
     float: left;
 }
+.form-box {
+  width: 30%;
+  background: #fff;
+  border: 2px solid #cec4c4;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+}
+.form-box h3 {
+  padding: 20px 0;
+}
+.form-box button:first-of-type {
+  border-color: #cec4c4;
+  border-width: 2px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+.form-box button:last-of-type {
+  background-color: #fff;
+  margin: 12px;
+  border-radius: 0;
+  color: #fbfbfb;
+  background: #b1adad;
+}
