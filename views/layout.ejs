@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main.css">
     <title>Haz Manga</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <% if(alerts.success){ alerts.success.forEach(function(msg){ %>
-    <div class="alert alert-success">
-      <%= msg %>
-    </div>
-    <% }) } if(alerts.error){ alerts.error.forEach(function(msg){ %>
-    <div class="alert alert-danger">
-      <%= msg %>
-    </div>
-    <% })} if(alerts.autherror){alerts.autherror.forEach(function(msg){ %>
-    <div class="alert alert-danger">
-      Your <%= msg.param %> has <%= msg.msg %>
-    </div>
-    <% })} %>
-    <nav>
-      <button onclick="window.location='/home'">Home</button>
-      <% if(currentUser) {%>
-      <button onclick="window.location='/auth/logout'">Logout</button>
-      <%} %> <% if(!currentUser) {%>
-      <button onclick="window.location='/auth/login'">Login</button>
-      <button onclick="window.location='/auth/register'">Register</button>
-      <%} %>
-    </nav>
-    <%- body %>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"
-    ></script>
-    <script src="/js/happy.js"></script>
-  </body>
+        <div class="alert alert-success">
+            <%= msg %>
+        </div>
+        <% }) } if(alerts.error){ alerts.error.forEach(function(msg){ %>
+            <div class="alert alert-danger">
+                <%= msg %>
+            </div>
+            <% })} if(alerts.autherror){alerts.autherror.forEach(function(msg){ %>
+                <div class="alert alert-danger">
+                    Your
+                    <%= msg.param %> has
+                        <%= msg.msg %>
+                </div>
+                <% })} %>
+                    <script>
+                        setTimeout(() => {
+                            console.log("yes")
+                            $(".alert").fadeOut(2000, function() {
+                                $(this).remove();
+                            });
+                        }, 3000);
+                    </script>
+                    <nav>
+                        <button onclick="window.location='/home'">Home</button>
+                        <% if(currentUser) {if(currentUser.isSeller) {%>
+                            <% console.log('current user',currentUser) %>
+                                <button class="nav-left" onclick="window.location='/item'">Items</button>
+                                <button class="nav-left" onclick="window.location='/order'">Orders</button>
+                                <%} }if(currentUser) {%> <section class="nav-right">
+                                     <button  onclick="window.location='/cart'">Cart</button>
+                                        <button  onclick="window.location='/auth/change'">Change Password</button>
+                                        <button  onclick="window.location='/auth/logout'">Logout</button></section>
+                                        <%} if(!currentUser) {%>
+                                    <button class="nav-right" onclick="window.location='/auth/login'">Login</button>
+                                    <button class="nav-right" onclick="window.location='/auth/register'">Register</button>
+                                    <%} %>
+                    </nav>
+                    <%- body %>
+
+</body>
+
 </html>

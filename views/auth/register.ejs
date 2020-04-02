@@ -1,37 +1,46 @@
-<div>
-  <form method="POST" action="/auth/register">
-    <div>
-      <label>First Name</label>
-      <input name="firstname" type="text" />
-    </div>
-    <div>
-      <label>Last Name</label>
-      <input name="lastname" type="text" />
-    </div>
-    <div>
-      <label>Email</label>
-      <input name="email" placeholder="name@domain.com"/>
-    </div>
-    <div>
-      <label>Address</label>
-      <div></div>
-      <span>House Number</span>
-      <input name="address.houseNo" placeholder="12345" />
-      <span>Street</span>
-      <input name="address.street" placeholder="60th" />
-      <span>District</span>
-      <input name="address.district" placeholder="Tahlia" />
-    </div>
-    <div>
-      <label>Password</label>
-      <input name="password" type="password" />
-    </div>
-    <div>
-      <label>Confirm Password</label>
-      <input name="confirmPassword" type="password" />
-    </div>
-    <div>
-      <button type="submit">Register</button>
-    </div>
-  </form>
+<div class="wrapper user">
+    <form method="POST" action="/auth/register">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>First Name</label>
+                <input type="text" name="firstname" class="form-control" required="true">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Last Name</label>
+                <input type="text" name="lastname" class="form-control" required="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" placeholder="name@domin.com" required="true">
+        </div>
+        <div><label>Address:</label></div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>House Number</label>
+                <input class="form-control" name="address.houseNo" name="address.houseNo" placeholder="12345" required="true" />
+            </div>
+            <div class="form-group col-md-5">
+                <label>Street</label>
+                <input class="form-control" name="address.street" name="address.street" placeholder="60th" required="true" />
+            </div>
+            <div class="form-group col-md-4">
+                <label>District</label>
+                <input class="form-control" name="address.district" name="address.district" placeholder="Tahlia" required="true" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" required="true" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Confirm Password</label>
+                <input class="form-control" name="confirmPassword" type="password" required="true" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+
+    </form>
 </div>

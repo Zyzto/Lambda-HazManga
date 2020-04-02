@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 const orderSchema = mongoose.Schema({
     item: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Item'
+        ref: 'Item',
     }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
     status: {
-        enum: ['processing', 'shipped', 'delivered'],
+        enum: ['processing', 'shipped', 'delivered', 'archived'],
         type: String,
         default: 'processing'
     },
@@ -18,7 +18,8 @@ const orderSchema = mongoose.Schema({
         isCash: Boolean,
         cardNumber: Number,
         secretCode: Number,
-        expDate: String
+        expDate: String,
+        total: Number
     }
 })
 

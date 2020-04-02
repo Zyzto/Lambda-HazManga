@@ -5,6 +5,8 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const flash = require("connect-flash"); // displays on time msgs
 const passport = require("./helper/ppConfig");
+const methodOverride = require('method-override');
+const MongoStore = require('connect-mongo')(session)
 
 //init
 const server = express()
@@ -12,6 +14,7 @@ const server = express()
 //Routers
 const authRoutes = require("./routes/auth.route");
 const itemRoutes = require("./routes/item.route");
+const orderRoutes = require("./routes/order.route");
 //
 
 //mongoDB connection
@@ -29,14 +32,18 @@ server.use(express.urlencoded({
 }))
 server.set("view engine", "ejs")
 server.use(expressLayouts)
+server.use(methodOverride('_method'));
 
 //--must be before passport
 server.use(
     session({
         secret: process.env.SECRET,
         saveUninitialized: true,
-        resave: false
+        resave: false,
         // cookie: { maxAge: 360000 } //duration of session
+        store: new MongoStore({
+            url: process.env.MONGODB
+        })
     })
 )
 
@@ -54,6 +61,7 @@ server.use(function (request, response, next) {
 //server.use(<routes>)
 server.use(authRoutes)
 server.use(itemRoutes)
+server.use(orderRoutes)
 //
 
 //must be after routes
