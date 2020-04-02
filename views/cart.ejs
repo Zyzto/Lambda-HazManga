@@ -1,12 +1,43 @@
 <button onclick="window.location='/order/payment'">Checkout</button>
 <% let cartTotal = 0 %> <% cart.forEach(item => { %>
-<div>
-  <img src="<%= item.image %> " width="200" height="300" />
-  <div>Name: <%= item.name %></div>
-  <div>Description: <%= item.description %></div>
-  <div>Quantity: <%= count[item._id] %></div>
-  <div>Price: <%= count[item._id]*item.price %> SAR</div>
+<div class="cart-box"> 
+  
+  <div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th style="width:50%">Product</th>
+      <th style="width:10%">Price</th>
+      <th style="width:8%">Quantity</th>
+      <th style="width:22%" class="text-center">Subtotal</th>
+      <th style="width:10%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     
+          <div class="col-sm-2 hidden-xs">
+  <img class="product-image" src="<%= item.image %> "  width="100" height="100" />
+  </div>
+  <div class="col-sm-10"></div>
+  <div class="product-details">
+
+
+  <div class="nomargin">Name: <%= item.name %></div>
+</div>
+</div>
+</td>
+  <div class="product-description">Description: <%= item.description %>
+  </div>
+</div>
+</td>
+<td data-th="Price"> Price: <%= count[item._id]*item.price %> SAR</div>
+</div>
+<td data-th="Quantity">Quantity: <%= count[item._id] %></div>
+  
+
   <div>
+
     <form action="/cart/delete/<%=item._id%>?_method=DELETE" method="POST">
       <input type="submit" name="" value="Delete" />
     </form>

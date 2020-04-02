@@ -136,3 +136,38 @@ span {
   color: #fbfbfb;
   background: #b1adad;
 }
+.cart-box{
+
+
+    background-color:#fff;
+    width: 50%;
+    margin: 50px auto;
+padding: 50px;
+
+}
+product-image{
+    width: 100px;
+
+
+}
+
+.product-details{
+
+    float: left; width: 37%;
+}
+.column-labels {
+    display: none;
+  }
+  .product-image {
+    float: right;
+    width: auto;
+    
+      margin: 0 0 10px 10px;
+    }
+    .product-details {
+        float: none;
+        margin-bottom: 10px;
+        width: auto;
+      }
+    
+      
