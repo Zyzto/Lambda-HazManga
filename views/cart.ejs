@@ -53,10 +53,5 @@
   </div>
   <% cartTotal += (count[item._id]*item.price) %>
 </div>
-<!-- <script>
-  $("#qty<%= item._id %>").change(() => {
-    $("#updatebtn<%= item._id %>").css("display", "");
-  });
-</script> -->
 <% }) %>
 <div>Order Total: <%= cartTotal %> SAR</div>

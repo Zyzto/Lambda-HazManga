@@ -1,14 +1,18 @@
-<div class="form-box">
-<form method ="POST" action="/auth/login">
-    <div class="form-group">
-      <h3 class="form-signin-heading">Create an account or Login</h3>
-      <input type="email" name='email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted" hidden>We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <button type="submit" class="btn"> Sign in</button><br>
-    <a class="btn" href= "/auth/register"> Create New Account</a>
-  </form>
+<div class="wrapper user">
+    <form method="POST" action="/auth/login">
+        <h3 class="login">Login or Create an account</h3>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" placeholder="name@domin.com" required="true">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" name="password" type="password" required="true" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+
+        <button id="But" class="btn btn-primary" onclick="window.location='/auth/register'">Create new account</button>
+    </form>
 </div>

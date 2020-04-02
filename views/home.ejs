@@ -1,31 +1,31 @@
-<form method="POST" action="/home">
-    <div>
-        <label for="chat-username">Name</label>
-        <input type="text"  name="name">
-    </div>
+<div class="wrapper">
+    <h1 class="mangaStock">MANGA Stock</h1>
+    <% if (currentUser) { %>
+        <span><i class="shopping-cart"><%= currentUser.cart.length%></i></span>
+    <% } %>
 
-        <div>
-            <label for="">Message: </label>
-            <input type="text"  id="">
-          </div>
-          
-    <div>
-          <button type="submit" class="btn btn-primary">Send</button>
-     </div>
-        </form>
-    
-
-
-       
-<% item.forEach(card => { %>
-    <div>
-        <img src="<%= card.image %> " width="200" height="300">
-        <div><%= card.name %></div>
-        <div><%= card.description %></div>
-        <% if(currentUser) {%>
-        <form action="/cart/add/<%=card._id%>?_method=PUT" method="POST">
-            <input type="submit" name="" value="+"/>
-        </form>        
-        <%} %>
-    </div>
-    <% }) %>
+   <div class="clear"></div>
+   <!-- items -->
+   <div class="items">
+       <!-- single item -->
+       <% item.forEach(card => { %>
+       <div class="item">
+           <img src="<%= card.image %>" alt="item" />
+            <h2 class="cardName"><%= card.name %></h2>
+           <p>Price: <em><%= card.price %> SAR</em>
+           </p>
+           <% if(currentUser) {%>
+            <form action="/cart/add/<%=card._id%>?_method=PUT" method="POST">
+                <% if(card.quantity>0){ %>
+                    <p>Available</p>
+                    <input type="submit" name="" value="Add to cart"/>
+                    <% } %>
+                    <% if(card.quantity==0){ %>
+                        <p>not Available</p>
+                        <% } %>
+            </form>
+            <% }%>
+       </div>
+       <% }) %>
+   </div>
+</div>
