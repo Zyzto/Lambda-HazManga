@@ -3,12 +3,18 @@ const User = require("../models/user.model");
 const Item = require("../models/item.model");
 const Order = require("../models/order.model");
 const flash = require('connect-flash')
-const async = require('async')
-
 const {
     check,
     validationResult
 } = require("express-validator");
+
+const counta = (array) => {
+    var counts = {}
+    array.forEach((x) => {
+        counts[x] = (counts[x] || 0) + 1
+    });
+    return counts
+}
 
 
 router.get('/order', (request, response) => {
@@ -65,7 +71,7 @@ router.put('/cart/update/remove/:id', (request, response, next) => {
     const choosenItem = request.params.id
     const qty = request.body.qty
     const itemQTY = request.body.itemQTY
-    if (qty -1 > 0) {
+    if (qty - 1 > 0) {
         User.findById(response.locals.currentUser._id).then((user) => {
             let index = user.cart.findIndex((e) => {
                 return e.equals(choosenItem)
@@ -82,6 +88,61 @@ router.put('/cart/update/remove/:id', (request, response, next) => {
     }
 })
 
-// router.get()
+router.get('/checkout/payment', (request, response) => {
+    User.findById(response.locals.currentUser._id).then(user => {
+        const count = counta(user.cart)
+        Item.find({
+            _id: user.cart
+        }).then(cart => {
+            let countPrice = 0
+            cart.forEach((item) => {
+                countPrice += (count[item._id] * item.price)
+            })
+            response.render('checkout', {
+                price: countPrice,
+                cart
+            })
+        })
+    })
+})
+
+router.post('/checkout/payment', (request, response) => {
+    User.findById(response.locals.currentUser._id).then(user => {
+        const count = counta(user.cart)
+        Item.find({
+            _id: user.cart
+        }).then(cart => {
+            let countPrice = 0
+            cart.forEach((item) => {
+                countPrice += (count[item._id] * item.price)
+            })
+            let order = new Order()
+            order.user = response.locals.currentUser._id
+            order.item = user.cart
+            if (request.body.isCash) {
+                if (request.body.isCash == 'true') {
+                    order.payment.isCash = true
+                    order.payment.total = countPrice + 16
+                } else {
+                    order.payment.isCash = false
+                    order.payment.cardNumber = request.body.cardNumber
+                    order.payment.secretCode = request.body.secretCode
+                    order.payment.expDate = request.body.expDate
+                    order.payment.total = countPrice
+                }
+            }
+            order.save().then(() => {
+                user.cart.splice(0, user.cart.length)
+                user.save().then(() => {
+                    response.redirect('/')
+                    request.flash('success', 'Order Has been made')
+                })
+            }).catch(err => {
+                console.log('error', err)
+            })
+        })
+    })
+})
+
 
 module.exports = router

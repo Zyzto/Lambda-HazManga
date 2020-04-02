@@ -1,0 +1,50 @@
+<div>checkOut - Payment</div>
+<div>
+  <div>total <%= price %> SAR</div>
+  <button class="btn btn-default" id="credit">Credit</button>
+  <button class="btn btn-primary" id="cash">Cash</button>
+  <div id="creditList" style="display: none;">
+    <form method="POST" action="/checkout/payment">
+      <label>Card Number</label>
+      <input type="text" name="cardNumber" placeholder="1234567890" />
+      <label>Secret Code</label>
+      <input type="text" name="secretCode" placeholder="987" />
+      <label>Experation Date</label>
+      <input type="text" id="expiry" name="expDate" placeholder="MM/YY" />
+      <input type="hidden" name="isCash" value="false" />
+      <input type="submit" name="" value="Buy" />
+    </form>
+  </div>
+  <div id="cashList">
+    <form method="POST" action="/checkout/payment">
+      <label>Card Number</label>
+      <div>
+        *There will be 16 SAR extra Charge for Total of <%= price+16 %> SAR
+      </div>
+      <input type="hidden" name="isCash" value="true" />
+      <input type="submit" name="" value="Buy" />
+    </form>
+  </div>
+  <script>
+    $("#credit").click(() => {
+      $("#creditList").css("display", "");
+      $("#cashList").css("display", "none");
+      $("#cash")
+        .removeClass("btn-primary")
+        .addClass("btn-default");
+      $("#credit")
+        .removeClass("btn-default")
+        .addClass("btn-primary");
+    });
+    $("#cash").click(() => {
+      $("#creditList").css("display", "none");
+      $("#cashList").css("display", "");
+      $("#credit")
+        .removeClass("btn-primary")
+        .addClass("btn-default");
+      $("#cash")
+        .removeClass("btn-default")
+        .addClass("btn-primary");
+    });
+  </script>
+</div>
